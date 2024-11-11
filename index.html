@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALCULAR SALÁRIO LÍQUIDO - ADS</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <section class="pp">
+        <div class="formulario" id="for">
+            <h1>SALÁRIO LIQUIDO</h1>
+            <div class="for1">
+                <div>
+                    <h3>Salário Bruto</h3>
+                    <input id="salarioBruto" class="campo_numero" type="number">
+                </div>
+                <div>
+                    <h3>Dependentes</h3>
+                    <input id="dependentes" class="campo_numero" type="number" placeholder="0">
+                </div>
+                <div>
+                    <input class="submit" type="button" value="Calcular" onclick="calcular()">
+                </div>
+
+                <div id="resultado" class="result"></div>
+            </div>
+            <div id="resultado" class="result"></div>
+        </div>
+    </section>
+    <div class="dvf">
+        <footer>
+            <h3>Sobre</h3>
+            <p>Desenvolvido por Warly Martins Souza, do curso de Análise e Desenvolvimento de Sistemas (ADS) &copy; 2024. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        function calcular() {
+            const salarioBruto = parseFloat(document.getElementById('salarioBruto').value);
+            let dependentes = parseInt(document.getElementById('dependentes').value);
+
+            if (isNaN(dependentes)) {
+                dependentes = 0;
+            }
+            
+            const descontoDependente = dependentes * 189.59;
+            
+            const inssPatronal = (salarioBruto * 0.288).toFixed(2);
+            let inss = 0;
+            if (salarioBruto <= 1412.00) {
+                inss = salarioBruto * 0.075;
+            } else if (salarioBruto <= 2666.68) {
+                inss = 1412.00 * 0.075 + (salarioBruto - 1412.00) * 0.09;
+            } else if (salarioBruto <= 4000.03) {
+                inss = 1412.00 * 0.075 + (2666.68 - 1412.00) * 0.09 + (salarioBruto - 2666.68) * 0.12;
+            } else if (salarioBruto <= 7786.02) {
+                inss = 1412.00 * 0.075 + (2666.68 - 1412.00) * 0.09 + (4000.03 - 2666.68) * 0.12 + (salarioBruto - 4000.03) * 0.14;
+            } else {
+                inss = 1412.00 * 0.075 + (2666.68 - 1412.00) * 0.09 + (4000.03 - 2666.68) * 0.12 + (7786.02 - 4000.03) * 0.14;
+            }
+            inss = inss.toFixed(2);
+
+            const baseCalculoIRRF = salarioBruto - inss - descontoDependente;
+
+            let irrf = 0;
+            if (baseCalculoIRRF <= 2259.20) {
+                irrf = 0;
+            } else if (baseCalculoIRRF <= 2826.65) {
+                irrf = (baseCalculoIRRF * 0.075 - 169.44);
+            } else if (baseCalculoIRRF <= 3751.05) {
+                irrf = (baseCalculoIRRF * 0.15 - 381.44);
+            } else if (baseCalculoIRRF <= 4664.68) {
+                irrf = (baseCalculoIRRF * 0.225 - 622.77);
+            } else {
+                irrf = (baseCalculoIRRF * 0.275 - 896.00);
+            }
+            irrf = irrf.toFixed(2);
+
+            const fgts = (salarioBruto * 0.08).toFixed(2);
+
+            const salarioLiquido = (salarioBruto - inss - irrf).toFixed(2);
+
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = `
+                <h1>Resultado</h1>
+                <strong>
+                <p>Salário Bruto:<span style="color: orangered;"> R$ ${salarioBruto.toFixed(2)}</span></p>
+                <p>INSS Patronal:<span style="color: orangered;">  R$ ${inssPatronal}</span></p>
+                <p>INSS Empregado:<span style="color: orangered;">  R$ ${inss}</span></p>
+                <p>FGTS:<span style="color: orangered;">  R$ ${fgts}</span></p>
+                <p>Dependentes:<span style="color: orangered;">  R$ ${descontoDependente.toFixed(2)}</span></p>
+                <p>IRRF:<span style="color: orangered;">  R$ ${irrf}</span></p>
+                <p>Salário Líquido:<span style="color: green;">  R$ ${salarioLiquido}</span></p>
+                </strong>
+            `;
+            resultadoDiv.classList.add('visible');
+        }
+    </script> 
+</body>
+</html>

@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+ 
+}
+
+.pp {
+    display: flex;
+    justify-content: center;
+}
+
+.formulario {
+    margin-top: 50px;
+    display: grid;
+    justify-content: center;
+    width: 480px;
+    background-color: rgba(118, 122, 122, 0.295);
+    border-radius: 10px;
+}
+
+.formulario h1 {
+    text-align: center;
+}
+
+.for1 div {
+    display: grid;
+    justify-content: center;
+    
+}
+
+.dvf {
+    display: flex;
+    justify-content: center;
+}
+
+footer {
+    margin-top: 10px;
+    width: 480px;
+    height: 130px;
+    border-radius: 10px;
+    color: rgb(61, 61, 61);
+}
+
+footer p {
+    text-align: justify;
+    margin: 20px;
+}
+
+footer h3{
+    text-align: center;
+}
+
+.campo_numero {
+    width: 300px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px;
+}
+
+.submit {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: aqua;
+}
+
+.submit:hover {
+    background-color: rgb(21, 255, 0);
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .formulario {
+        margin-top: 20px;
+        display: grid;
+        justify-content: center;
+        width: 400px;
+        background-color: rgba(188, 190, 192, 0.5);
+        border-radius: 10px;
+        margin-bottom: 0;
+    }
+
+}
